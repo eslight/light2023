@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户名重复认证</title>
+</head>
+<body>
+   <script>
+     //页面加载完毕执行回调函数
+     window.onload=function (){
+         document.getElementById("actno").onfocus=function (){
+             document.getElementById("span1").innerHTML=""
+         }
+       //鼠标单击时间
+       document.getElementById("actno").onblur=function (){
+         //创建ajax核心对象
+         var xml = new XMLHttpRequest();
+         //注册回调函数
+         xml.onreadystatechange=function (){
+           if (this.readyState == 4) {
+             if (this.status = 200) {
+               document.getElementById("span1").innerHTML=this.responseText
+             }else {
+               alert(this.status)
+             }
+           }
+         }
+
+         //开启通道
+         xml.open("post","/ajax/ajax2",true)
+           xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+         //发送请求
+         var usrname = document.getElementById("actno").value;
+         xml.send("actno="+usrname)
+       }
+     }
+
+   </script>
+   用户名<input type="text" id="actno">
+   <span id="span1"></span>
+
+</body>
+</html>

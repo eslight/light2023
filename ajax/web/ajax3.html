@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试ajax中get的请求乱码问题</title>
+</head>
+<body>
+  user<input type="text" id="user">
+  <button id="get1">get请求</button>
+  <button id="post">post请求</button>
+<div id="div1"></div>
+  <div id="div2"></div>
+<script type="text/javascript">
+   window.onload=function (){
+     document.getElementById("get1").onclick=function (){
+         alert("fa")
+         /**
+       //创建ajax核心对象
+       var xml = new XMLHttpRequest();
+       //注册回调函数
+       xml.onreadystatechange=function (){
+         if (this.readyState == 4) {
+           if (this.status == 200) {
+             document.getElementById("div1").innerHTML=this.responseText;
+           }else {
+             alert(this.status)
+           }
+         }
+       }
+       //开启通道
+       xml.open("GET","/ajax/ajax3?user="+document.getElementById("user").value+"&t="+new Date().getTime(),true);
+       //发送请求
+       xml.send();
+          */
+     }
+   }
+   //post
+   window.onload=function (){
+       document.getElementById("get1").onclick=function (){
+            //创建ajax核心对象
+            var xml = new XMLHttpRequest();
+            //注册回调函数
+            xml.onreadystatechange=function (){
+         if (this.readyState == 4) {
+           if (this.status == 200) {
+             document.getElementById("div1").innerHTML=this.responseText;
+           }else {
+             alert(this.status)
+           }
+         }
+       }
+            //开启通道
+
+            xml.open("GET","/ajax/ajax3?user="+document.getElementById("user").value+"&t="+new Date().getTime(),false);
+            //发送请求
+            xml.send();
+
+       }
+     document.getElementById("post").onclick=function (){
+       var xml =new XMLHttpRequest();
+       xml.onreadystatechange=function (){
+         if (this.readyState == 4) {
+           if (this.status == 200) {
+             document.getElementById("div2").innerHTML=this.responseText;
+           }else {
+             alert(this.status)
+           }
+         }
+       }
+       xml.open("POST","/ajax/ajax3",true);
+       xml.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+       var user = document.getElementById("user").value;
+       xml.send("user="+user)
+     }
+   }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>测试封装的ajax</title>
+</head>
+<body>
+ user<input type="text" id="name">
+ <button id="user">提交名单</button>
+ <button id="fa">fsa</button>
+<div id="div1"></div>
+<script type="text/javascript" src="/ajax/js/jQuery-1.0.0.js"></script>
+<script type="text/javascript">
+     $(function (){
+         $("#fa").click(function (){
+             alert("fa")
+         })
+
+      $("#user").click(function (){
+          alert("da")
+      })
+
+    $("#user").click(function (){
+      $.ajax({
+        type:"GET",
+        url : "/ajax/ajax4",
+        async: true,
+          data: "name=" +$("#name").val(),
+        success:function (json){
+          $("#div1").html(json.uname)
+        }
+      })
+    })
+
+  })
+
+</script>
+</body>
+</html>

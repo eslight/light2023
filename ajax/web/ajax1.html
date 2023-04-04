@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+  username<input type="text" id="username"><br>
+  password<input type="text" id="password"><br>
+  <input type="button" value="hello" id="hello">
+<div id="a"></div>
+<script type="text/javascript">
+    //页面加载完毕执行回调函数
+    window.onload=function (){
+
+        document.getElementById("hello").onclick=function (){
+            //创建xml对象
+            var xml = new XMLHttpRequest();
+            //注册回调函数
+            xml.onreadystatechange=function (){
+                if (this.readyState==4) {
+                    if (this.status == 200) {
+                  document.getElementById("a").innerHTML=this.responseText
+                    }else {
+                        alert(this.status)
+                    }
+                }
+            }
+            //开启通道
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            xml.open("get","/ajax/ajax1?username="+username+"&password="+password,true)
+            //发送请求
+            xml.send()
+        }
+    }
+</script>
+</body>
+</html>
